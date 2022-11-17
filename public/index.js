@@ -1,23 +1,11 @@
 function createPhotoCard(photoURL, caption) {
 
-  var photoCardSection = document.createElement('section');
-  photoCardSection.classList.add('photo-card');
-
-  var imgContainerDiv = document.createElement('div');
-  imgContainerDiv.classList.add('img-container');
-  photoCardSection.appendChild(imgContainerDiv);
-
-  var img = document.createElement('img');
-  img.classList.add('person-photo-img');
-  img.src = photoURL;
-  imgContainerDiv.appendChild(img);
-
-  var captionDiv = document.createElement('div');
-  captionDiv.classList.add('caption');
-  captionDiv.textContent = caption;
-  photoCardSection.appendChild(captionDiv);
-
-  return photoCardSection;
+  var photoCardHtml = Handlebars.templates.photoCard({
+    url: photoURL,
+    caption: caption
+  })
+  console.log("== photoCardHtml:", photoCardHtml)
+  return photoCardHtml
 
 }
 
@@ -33,7 +21,7 @@ function handleModalAcceptClick() {
 
     var newPhotoCard = createPhotoCard(photoURL, caption);
     var photoCardContainer = document.querySelector('.photo-card-container');
-    photoCardContainer.appendChild(newPhotoCard);
+    photoCardContainer.insertAdjacentHTML("beforeend", newPhotoCard)
     hideModal();
 
   }
